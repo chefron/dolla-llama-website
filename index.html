@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolla Llama</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Load all dependencies in the head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.12/Recharts.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Jacquard+12&family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-links left">
+                <a href="#music">music</a>
+                <a href="#videos">videos</a>
+                <a href="#chat">chat</a>
+            </div>
+            <div class="brand">
+                <span class="brand-text">DOLLA LLAMA</span>
+            </div>
+            <div class="nav-links right">
+                <a href="#proof">mind feed</a>
+                <a href="#data">data</a>
+                <a href="#llamagang">$llamagang</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <p>art<s>ificial</s> intelligence musician</p>
+        </div>
+
+        <div class="stats-section">
+            <div class="chart-container" id="radar-chart">
+            </div>
+        </div>
+    </main>
+
+    <!-- Debug script to check if libraries loaded -->
+    <script>
+        window.addEventListener('load', function() {
+            console.log('Dependencies loaded?', {
+                React: !!window.React,
+                ReactDOM: !!window.ReactDOM,
+                PropTypes: !!window.PropTypes,
+                Recharts: !!window.Recharts
+            });
+        });
+    </script>
+
+    <script src="js/chart.js"></script>
+</body>
+</html>

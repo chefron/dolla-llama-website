@@ -1,0 +1,175 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url('../assets/neural_network_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Navigation styles */
+nav {
+    background-color: #000000;
+}
+
+.nav-content {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    align-items: center;
+    color: whitesmoke;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    width: 33%;
+}
+
+.nav-links.left {
+    justify-content: space-evenly;
+}
+
+.nav-links.right {
+    justify-content: space-evenly;
+}
+
+.brand {
+    width: 33%;
+    text-align: center;
+}
+
+.brand-text {
+    font-size: 3rem;
+    font-family: 'VT323';
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-family: 'VT323';
+    font-size: 1.25rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #9ca3af;
+}
+
+/* Main content styles */
+main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: #000000;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    font-family: "Jacquard 12", serif;
+}
+
+.stats-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    width: 60%;  /* Take up full width of parent */
+    max-width: 1200px; /* Or whatever maximum width you prefer */
+    margin: 2rem 0;
+    position: relative;
+}
+
+.stats-section p {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    text-align: center;
+    max-width: 28rem;
+    margin-top: 3rem;
+}
+
+/* Improved mobile styles */
+@media (max-width: 1024px) {
+    nav {
+        padding: 0.5rem 0;
+    }
+
+    .nav-content {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    
+    .brand {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .brand-text {
+        font-size: 2.25rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        padding: 0.5rem 0;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    .chart-container {
+        width: 90%;
+    }
+    
+}
+
+/* Add even smaller screen adjustments */
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.875rem;
+    }
+
+    .brand-text {
+        font-size: 2rem;
+    }
+    
+    .chart-container {
+        width: 90%;
+    }
+}
