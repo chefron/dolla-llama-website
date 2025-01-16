@@ -1,108 +1,88 @@
-// Create radar chart using Recharts
 window.onload = async function() {
-    const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } = Recharts;
+    const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Legend } = Recharts;
 
-    // Add the wrapper div and image
+    // Get container and clear it
     const chartContainer = document.getElementById('top-50-chart');
-    chartContainer.innerHTML = ''; // Clear loading message
+    chartContainer.innerHTML = '';
     
-    // Create wrapper div
+    // Create single wrapper with class
     const wrapper = document.createElement('div');
-    wrapper.className = 'relative w-full';
-    
-    // Create image
-    const img = document.createElement('img');
-    img.src = '../../assets/chart_bg.png';
-    img.alt = 'Dolla Llama';
-    img.className = 'w-full h-auto';
-    wrapper.appendChild(img);
-    
-    // Create an outer div for the padded area
-    const outerChartDiv = document.createElement('div');
-    outerChartDiv.style.position = 'absolute';
-    outerChartDiv.style.left = '55%';
-    outerChartDiv.style.top = '62%';
-    outerChartDiv.style.transform = 'translate(-50%, -50%)';
-    outerChartDiv.style.width = '55%';
-    outerChartDiv.style.aspectRatio = '1 / 1';
-    outerChartDiv.style.minWidth = '250px';
-    outerChartDiv.style.minHeight = '250px';
-    outerChartDiv.style.overflow = 'visible';
-    
-    // Create inner div for the visible chart area (with border)
-    const innerChartDiv = document.createElement('div');
-    innerChartDiv.style.position = 'absolute';
-    innerChartDiv.style.left = '50%';
-    innerChartDiv.style.top = '50%';
-    innerChartDiv.style.transform = 'translate(-50%, -50%)';
-    innerChartDiv.style.width = '55.5%';
-    innerChartDiv.style.height = '55.5%';
-    innerChartDiv.style.border = '2px solid red';
-    
-    outerChartDiv.appendChild(innerChartDiv);
-    wrapper.appendChild(outerChartDiv);
-    
-    // Add wrapper to container
+    wrapper.className = 'data-page-chart';
     chartContainer.appendChild(wrapper);
 
     // Default data in case loading fails
-    let data = [
-        { subject: 'Danceable', value: 80 },
-        { subject: 'Energetic', value: 70 },
-        { subject: 'Live', value: 10 },
-        { subject: 'Acoustic', value: 100 },
-        { subject: 'Happy', value: 75 },
-        { subject: 'Speechy', value: 20 },
-        { subject: 'Instrumental', value: 10 }
+    let chartData = [
+        { subject: 'Danceable', top50: 80, dolla: 70 },
+        { subject: 'Energetic', top50: 70, dolla: 80 },
+        { subject: 'Live', top50: 10, dolla: 15 },
+        { subject: 'Acoustic', top50: 100, dolla: 20 },
+        { subject: 'Happy', top50: 75, dolla: 65 },
+        { subject: 'Speechy', top50: 20, dolla: 25 },
+        { subject: 'Instrumental', top50: 10, dolla: 5 }
     ];
 
-    // Try to load the current averages
+    // Try to load both datasets
     try {
-        const response = await fetch('../../spotify-tracker/current_averages.csv');
-        const fileContent = await response.text();
-        const result = Papa.parse(fileContent, {
+        // Load Top 50 data
+        const top50Response = await fetch('../../spotify-tracker/current_averages.csv');
+        const top50Content = await top50Response.text();
+        const top50Result = Papa.parse(top50Content, {
             header: true,
             dynamicTyping: true,
             skipEmptyLines: true
         });
 
-            // Add a console.log to see what we're getting
-        console.log('Parsed CSV data:', result.data);
+        // Load Dolla Llama data
+        const dollaResponse = await fetch('../../spotify-tracker/dolla_averages.csv');
+        const dollaContent = await dollaResponse.text();
+        const dollaResult = Papa.parse(dollaContent, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true
+        });
 
-        if (result.data && result.data.length > 0) {
-            // Get the most recent entry (last row)
-            const latestData = result.data[result.data.length - 1];
+        console.log('Top 50 data:', top50Result.data);
+        console.log('Dolla data:', dollaResult.data);
+
+        if (top50Result.data.length > 0 && dollaResult.data.length > 0) {
+            const top50Data = top50Result.data[top50Result.data.length - 1];
+            const dollaData = dollaResult.data[0];  // Only one row of averages
             
-            // Update the data with the most recent averages
-            data = [
-                { subject: 'Danceable', value: latestData.Danceable },
-                { subject: 'Energetic', value: latestData.Energetic },
-                { subject: 'Live', value: latestData.Live },
-                { subject: 'Acoustic', value: latestData.Acoustic },
-                { subject: 'Happy', value: latestData.Happy },
-                { subject: 'Speechy', value: latestData.Speechy },
-                { subject: 'Instrumental', value: latestData.Instrumental }
+            // Combine both datasets
+            chartData = [
+                { subject: 'Danceable', top50: top50Data.Danceable, dolla: dollaData.Danceable },
+                { subject: 'Energetic', top50: top50Data.Energetic, dolla: dollaData.Energetic },
+                { subject: 'Live', top50: top50Data.Live, dolla: dollaData.Live },
+                { subject: 'Acoustic', top50: top50Data.Acoustic, dolla: dollaData.Acoustic },
+                { subject: 'Happy', top50: top50Data.Happy, dolla: dollaData.Happy },
+                { subject: 'Speechy', top50: top50Data.Speechy, dolla: dollaData.Speechy },
+                { subject: 'Instrumental', top50: top50Data.Instrumental, dolla: dollaData.Instrumental }
             ];
         }
     } catch (error) {
-        console.error('Error loading Spotify data:', error);
+        console.error('Error loading data:', error);
         // Using default data if there's an error
     }
 
     const Chart = React.createElement(ResponsiveContainer, { width: "100%", height: "100%" },
         React.createElement(RadarChart, { 
-            data: data,
+            data: chartData,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
             style: { overflow: 'visible' }
         },
-            React.createElement(PolarGrid, { stroke: "#fff", strokeOpacity: 0.5, gridType: "circle", strokeDasharray: "1 8" }),
+            React.createElement(PolarGrid, { 
+                stroke: "#fff", 
+                strokeOpacity: .8, 
+                gridType: "circle", 
+                strokeDasharray: "1 8" 
+            }),
             React.createElement(PolarAngleAxis, { 
                 dataKey: "subject",
                 tick: { 
                     fill: '#fff',
-                    fontSize: '.9em',
+                    fontSize: '1.2em',
                     fontFamily: 'VT323',
-                    opacity: 0.7,
+                    opacity: 0.9,
                     textAnchor: 'middle',
                     dy: 5
                 }
@@ -114,16 +94,39 @@ window.onload = async function() {
                 axisLine: false
             }),
             React.createElement(Radar, {
-                name: "Stats",
-                dataKey: "value",
-                stroke: "#ff0000",      // Bright red outline
-                strokeWidth: 3,         // Make the outline thicker
-                fill: "#ff0000",        // Red fill
-                fillOpacity: 0.2        // Very transparent fill
+                name: "Top 50",
+                dataKey: "top50",
+                stroke: "#00ff00",
+                strokeWidth: 3,
+                fill: "#00ff00",
+                fillOpacity: 0.2
+            }),
+            React.createElement(Radar, {
+                name: "Dolla Llama",
+                dataKey: "dolla",
+                stroke: "#ff0000",
+                strokeWidth: 3,
+                fill: "#ff0000",
+                fillOpacity: 0.35
+            }),
+            React.createElement(Legend, {
+                align: "center",
+                verticalAlign: "bottom",
+                payload: [
+                    { value: 'Dolla Llama', color: '#ff0000', type: 'line' },
+                    { value: 'Spotify Top 50', color: '#00ff00', type: 'line' } 
+                ],
+                wrapperStyle: { 
+                    color: '#fff', 
+                    opacity: 0.9,
+                    fontFamily: 'VT323',
+                    fontSize: '1.2em',
+                    columnGap: '5em'
+                }
             })
         )
     );
 
-    // Render the chart into the outer div
-    ReactDOM.render(Chart, outerChartDiv);
+    // Render the chart into the wrapper
+    ReactDOM.render(Chart, wrapper);
 };
