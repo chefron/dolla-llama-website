@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dolla Llama</title>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <!-- Load all dependencies in the head -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
@@ -13,34 +11,44 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Jacquard+12&family=Jersey+20&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
-<body>
+<body class="inverse-bg">
 
     <nav>
         <div class="nav-content">
             <div class="nav-links left">
-                <a href="../../index.html#music">music</a>
-                <a href="../../index.html#videos">videos</a>
-                <a href="../../index.html#chat">chat</a>
+                <a href="../music/music.html">music</a>
+                <a href="pages/videos/videos.html">videos</a>
+                <a href="pages/chat/chat.html">chat</a>
             </div>
-            <div class="brand">
-                <span class="brand-text">DOLLA LLAMA</span>
-            </div>
+                <div class="brand">
+                    <a href="../../index.html" class="brand-text">DOLLA LLAMA</a>
+                </div>
             <div class="nav-links right">
-                <a href="../../index.html#proof">mind feed</a>
-                <a href="data.html">data</a>
-                <a href="../../index.html#llamagang">$llamagang</a>
+                <a href="pages/mind_feed/mind_feed.html">mind feed</a>
+                <a href="">data</a>
+                <a href="pages/llamagang/llamagang.html">$llamagang</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <div class="hero">
-            <p>data</p>
+        <div class="comparison-chart-title">
+            AUDIO ANALYSIS<br> 
+            <span style="color: #ff0000;">Dolla Llama</span> vs. 
+            <span style="color: #00ff00;">Spotify Top 50 USA</span>
         </div>
         <div id="top-50-chart"></div>
+        <div class="terminal-container">
+            <div class="terminal-header">
+                > ANALYZING AUDIO SIGNATURES...
+            </div>
+            <div id="terminal-output" class="terminal-content">
+            </div>
+        </div>
     </main>
-    
+
     <script src="../../js/top-50-chart.js"></script>
 </body>
 </html>
