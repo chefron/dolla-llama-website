@@ -9,10 +9,12 @@ window.onload = function() {
     // Create wrapper div
     const wrapper = document.createElement('div');
     wrapper.className = 'relative w-full';
+    wrapper.style.maxWidth = '50%'; // Constrain width within the container
+    wrapper.style.margin = '0 auto'; // Center it
     
     // Create image
     const img = document.createElement('img');
-    img.src = 'assets/chart_bg.png';
+    img.src = 'assets/chart_bg_with_text.png';
     img.alt = 'Dolla Llama';
     img.className = 'w-full h-auto';
     wrapper.appendChild(img);
@@ -23,10 +25,8 @@ window.onload = function() {
     outerChartDiv.style.left = '55%';
     outerChartDiv.style.top = '62%';
     outerChartDiv.style.transform = 'translate(-50%, -50%)';
-    outerChartDiv.style.width = '55%';
-    outerChartDiv.style.aspectRatio = '1 / 1';
-    outerChartDiv.style.minWidth = '250px';
-    outerChartDiv.style.minHeight = '250px';
+    outerChartDiv.style.width = '80%';
+    outerChartDiv.style.height = '80%';
     outerChartDiv.style.overflow = 'visible';
     
     // Create inner div for the visible chart area (with border)
@@ -46,13 +46,13 @@ window.onload = function() {
     chartContainer.appendChild(wrapper);
 
     const data = [
-        { subject: 'Danceable', value: 80 },
-        { subject: 'Energetic', value: 70 },
-        { subject: 'Live', value: 10 },
-        { subject: 'Acoustic', value: 10 },
-        { subject: 'Happy', value: 75 },
-        { subject: 'Speechy', value: 20 },
-        { subject: 'Instrumental', value: 10 }
+        { subject: 'danceable', value: 80 },
+        { subject: 'energetic', value: 70 },
+        { subject: 'live', value: 10 },
+        { subject: 'acoustic', value: 10 },
+        { subject: 'happy', value: 75 },
+        { subject: 'speechy', value: 20 },
+        { subject: 'instrumental', value: 10 }
     ];
 
     const Chart = React.createElement(ResponsiveContainer, { width: "100%", height: "100%" },
@@ -66,9 +66,9 @@ window.onload = function() {
                 dataKey: "subject",
                 tick: { 
                     fill: '#fff',
-                    fontSize: '.9em',
-                    fontFamily: 'VT323',
-                    opacity: 0.7,
+                    fontSize: '.7rem',
+                    fontFamily: 'Roboto',
+                    opacity: 0.75,
                     textAnchor: 'middle',
                     dy: 5
                 }

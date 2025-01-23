@@ -234,8 +234,8 @@ window.onload = async function() {
                 dataKey: "subject",
                 tick: { 
                     fill: '#fff',
-                    fontSize: '1.2em',
-                    fontFamily: 'VT323',
+                    fontSize: '.8em',
+                    fontFamily: 'Fira Code',
                     opacity: 0.9,
                     textAnchor: 'middle',
                     dy: 5

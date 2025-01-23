@@ -1,9 +1,5 @@
-spotify-tracker/venv/
-spotify-tracker/venv/
+venv/
 __pycache__/
 *.pyc
-spotify-tracker/venv/
-__pycache__/
-*.pyc
-*.Zone.Identifier
-Top 50 - USA (1).csv
+**/*.Zone.Identifier
+spotify-tracker/Top 50 - USA*.csv

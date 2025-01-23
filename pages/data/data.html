@@ -11,6 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Jacquard+12&family=Jersey+20&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body class="inverse-bg">
@@ -20,11 +22,11 @@
             <div class="nav-links left">
                 <a href="../music/music.html">music</a>
                 <a href="pages/videos/videos.html">videos</a>
-                <a href="pages/chat/chat.html">chat</a>
+                <a href="pages/chat/chat.html">collab</a>
             </div>
-                <div class="brand">
-                    <a href="../../index.html" class="brand-text">DOLLA LLAMA</a>
-                </div>
+            <div class="brand">
+                <a href="../../index.html" class="brand-text">DOLLA LLAMA</a>
+            </div>
             <div class="nav-links right">
                 <a href="pages/mind_feed/mind_feed.html">mind feed</a>
                 <a href="">data</a>
@@ -34,17 +36,23 @@
     </nav>
 
     <main>
-        <div class="comparison-chart-title">
-            AUDIO ANALYSIS<br> 
-            <span style="color: #ff0000;">Dolla Llama</span> vs. 
-            <span style="color: #00ff00;">Spotify Top 50 USA</span>
+        <div class="hero-inverse">
+            <p>AUDIO ANALYSIS</p>
         </div>
-        <div id="top-50-chart"></div>
-        <div class="terminal-container">
-            <div class="terminal-header">
-                > ANALYZING AUDIO SIGNATURES...
+        <div class="audio-analysis-wrapper">
+            <div class="comparison-chart-wrapper">
+                <div class="comparison-chart-title"> 
+                    <span style="color: #ff0000; font-weight: 600;">Dolla Llama</span> vs. 
+                    <span style="color: #00ff00;">Spotify Top 50 USA</span>
+                </div>
+                <div id="top-50-chart"></div>
             </div>
-            <div id="terminal-output" class="terminal-content">
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    > ANALYZING AUDIO SIGNATURES...
+                </div>
+                <div id="terminal-output" class="terminal-content">
+                </div>
             </div>
         </div>
     </main>

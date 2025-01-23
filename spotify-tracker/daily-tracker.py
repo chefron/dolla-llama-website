@@ -16,6 +16,14 @@ def time_to_seconds(time_str):
 
 def export_playlist_data(playlist_uri):
     script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Clean up existing files
+    for filename in os.listdir(script_dir):
+        if filename.startswith("Top 50 - USA") and filename.endswith(".csv"):
+            try:
+                os.remove(os.path.join(script_dir, filename))
+            except Exception as e:
+                print(f"Error removing old file {filename}: {str(e)}")
     
     chrome_options = webdriver.ChromeOptions()
     prefs = {
