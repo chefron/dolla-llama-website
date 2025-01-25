@@ -5,8 +5,8 @@
     box-sizing: border-box;
 }
 
-html, body {
-    min-height: 100vh;
+body {
+    height: 100vh;
     margin: 0;
     padding: 0;
     background-image: url('../assets/dolla_concert_bg.png');
@@ -14,26 +14,32 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: relative;
 }
 
-.darkened-center {
-    background-color: black;
-    background-image: 
-      radial-gradient(circle at center, 
-        rgba(0, 0, 0, 0.34) 0%, 
-        rgba(0, 0, 0, 0) 70%
-      ),
-      url('../assets/dolla_concert_bg.png');
-    background-size: cover;
-  }
+.overlay {
+    position: fixed;  /* Change to fixed */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.25) 25%,
+        rgba(0, 0, 0, 0.25) 75%,
+        rgba(0, 0, 0, 0)
+    );
+    z-index: 1;
+    pointer-events: none;
+}
 
 .no-scroll {
     overflow: hidden;
 }
 
-body.inverse-bg {
-    background-image: url('../assets/neural_network_bg_inverse_fade.png');
+body.data-bg {
+    background-image: url('../assets/club_crowd_bg.jpg');
+    background-size: cover;
 }
 
 body.music-page {
@@ -44,6 +50,17 @@ body.music-page {
 
 body.videos-page {
     background-image: none;
+}
+
+body.about-page {
+    background-color: black;
+    background-image: 
+      radial-gradient(circle at center, 
+        rgba(0, 0, 0, 0.34) 0%, 
+        rgba(0, 0, 0, 0) 70%
+      ),
+      url('../assets/dolla_on_car.png');
+      background-size: cover;
 }
 
 /* Navigation styles */
@@ -62,7 +79,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    color:  #f2f2f2;
     margin: 0 auto;
     padding: 0 1.2rem 0 1.2rem;
     position: relative;
@@ -84,7 +101,7 @@ nav {
     display: none; /* Hidden by default */
     background: none;
     border: none;
-    color: white;
+    color:  #f2f2f2;
     cursor: pointer;
     padding: 0.5rem;
     position: absolute;
@@ -115,19 +132,17 @@ nav {
 }
 
 .brand a {  
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-family: "Montserrat", serif;
     font-weight: 800;
     position: relative;
     z-index: 1;
-    background: linear-gradient(45deg, white, white, #0fffc3, white, white, #7e0fff, white, white);
+    background: linear-gradient(45deg,  #f2f2f2,  #f2f2f2, #edda1c,  #f2f2f2,  #f2f2f2, #a020f0, #f2f2f2,  #f2f2f2);
     background-size: 300% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 15s ease infinite;
-    text-shadow: 0 0 5px rgba(182, 182, 182, 0.3);
-    
 }
 
 @keyframes shine {
@@ -141,7 +156,7 @@ nav {
 }
 
 .nav-links a {
-    color: white;
+    color: #f2f2f2;
     text-decoration: none;
     font-family: "Fira Code", serif;
     font-size: 1.1rem;
@@ -170,10 +185,10 @@ main {
 .hero-section {
     width: 100%;
     max-width: 800px;
-    margin: 1rem 0 0 auto;
+    margin: 2.5rem 0 0 auto;
     padding-right: calc(300px + 8rem);
     padding-left: 4rem;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -227,10 +242,9 @@ main {
 }
 
 .hero-heading {
-    font-family: "Montserrat", serif;
-    font-size: clamp(3rem, 4vw, 3.5rem);
-    color: white;
-    font-weight: 700;
+    font-family: "Bebas Neue", serif;
+    font-size: clamp(3.5rem, 5vw, 4rem);
+    color: #f2f2f2;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
@@ -295,17 +309,17 @@ main {
 
 .hero-link {
     display: inline-block;
-    font-family: "Fira Code", serif;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.15);
+    font-family: 'JetBrains Mono', monospace;
+    color: #f2f2f2;
+    background-color: #a020f099;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border: 3px solid white;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+    padding: 0.75rem;
+    border: 3px solid #f2f2f2;
+    text-shadow: 1x 1px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+    border-radius: 6px;
     white-space: nowrap;
     opacity: 1;
     transition: all 0.2s ease;  /* Don't forget transition for hover effect */
@@ -313,7 +327,7 @@ main {
 
 .hero-link:hover {
     color: black;
-    background-color: rgb(255, 255, 255);
+    background-color: #f2f2f2;
     text-shadow: none;
 }
 
@@ -384,18 +398,20 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    color: #f2f2f2;
     margin: 0 auto;
     padding: 0 1.2rem 0 1.2rem;
     position: relative;
     animation: fadeInBottom 0.3s ease-in-out;
+
 }
 
 .social-icon {
     padding: 0.5rem;
     border-radius: 0.5rem;
     transition: all 0.2s ease;
-    color: white; /* Default color */
+    color: #f2f2f2; /* Default color */
+    z-index: 99;
 }
 
 .bottom-nav:hover .social-icon {
@@ -403,7 +419,7 @@ main {
 }
 
 .social-icon:hover {
-    color: white !important; /* Force white on hover */
+    color: #f2f2f2 !important; /* Force white on hover */
     background-color: rgba(0, 0, 0, 0.2); /* Subtle background on hover */
 }
 
@@ -459,7 +475,7 @@ main {
     gap: 20px;
     font-family: "Fira Code", serif;
     font-size: 1.4rem;
-    color: white;
+    color: #f2f2f2;
     font-weight: 600;
     opacity: .9;
 }
@@ -473,14 +489,14 @@ main {
     align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 3px solid white;
+    border: 3px solid  #f2f2f2;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: rgba(0, 0, 0, 0.15);
 }
 
 .carousel-nav-buttons button:hover {
     color: black;
-    background-color: rgb(255, 255, 255);
+    background-color: #f2f2f2;
 }
 
 
@@ -547,16 +563,34 @@ main {
     transition: all 0.3s ease;
 }
 
-
-.chart-container {
-    height: 100%;
-    width: 40%;
-    max-height: calc(100vh - 120px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.about-header {
+    font-family: "Bebas Neue", serif;
+    color: #edda1c;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 15vh;
 }
+
+.about-section {
+    width: 75vw;
+    margin: 0 auto;
+}
+
+.about-text p{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.3rem;
+    color: 	#f2f2f2;
+    text-shadow: 1x 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1.1rem;
+}
+
+
+
+
+
+
 
 .home-song-section {
     height: 100%;
@@ -568,26 +602,55 @@ main {
     position: relative;
 }
 
-
-.stats-section p {
-    color: #9ca3af;
+/*
+.about-chart-section p {
+    color: #ffffff;
     font-size: 0.875rem;
     text-align: center;
     max-width: 28rem;
     margin-top: 3rem;
+}*/
+
+.data-header {
+    font-family: 'JetBrains Mono', monospace;
+    color:  #f2f2f2;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #a020f04b;
+    background: rgba(30, 30, 30, 0.8);
+  }
+
+.audio-analysis-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 6rem;
+    
 }
 
-.data-page-chart {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-width: 600px;
-    margin: 0 auto;
-}
+.comparison-chart-header {
+    font-family: 'JetBrains Mono', monospace;
+    color: #E4E4E4;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #a020f04b;
+    background: rgba(30, 30, 30, 0.8);
+  }
 
 .comparison-chart-wrapper {
-    align-items: center;
-    max-width: 800px;
-    margin: 2rem auto 0;
+    width: 40%;
 }
 
 .comparison-chart-title {
@@ -600,25 +663,31 @@ main {
 }
 
 .terminal-container {
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 1px solid #00ff00;
-    border-radius: 4px;
-    width: 80%;
-    max-width: 800px;
-    margin: -30px auto 2rem;
+    width: 30%;
+    border-radius: 8px;
     padding: 1em;
-    font-family: 'VT323', monospace;
-    color: #00ff00;
+    font-family: "JetBrains Mono", monospace;
+    color: #808080;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
+    border: 2px solid  #f2f2f2;
+    border-radius: 8px;
+    background: #1e1e1ecb;
+    box-shadow: 0 0 20px #a020f04b;
+    transition: box-shadow 0.3s ease;
 }
 
+.terminal-container:hover {
+    box-shadow: 0 0 30px #a020f04b;
+   }
+
 .terminal-header {
-    border-bottom: 1px solid #00ff00;
+    border-bottom: 1px dashed #f2f2f2;
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: #edda1c;
 }
 
 .terminal-content {
@@ -626,11 +695,11 @@ main {
     overflow-y: auto;
     padding: 0.5em;
     scrollbar-width: thin;
-    scrollbar-color: #00ff00 rgba(0, 0, 0, 0.3);
+    scrollbar-color: #363636 #1E1E1E;
 }
 
 .dolla-terminal-line {
-    color: #ff0000;
+    color: #f2f2f2;
 }
 
 /* For webkit browsers like Chrome/Safari */
@@ -639,17 +708,56 @@ main {
 }
 
 .terminal-content::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
+    background: #1E1E1E;
 }
 
 .terminal-content::-webkit-scrollbar-thumb {
-    background-color: #00ff00;
+    background-color: #363636;
     border-radius: 4px;
 }
 
 .blink {
     animation: blink 1s infinite;
 }
+
+
+/* llamagang.html */
+.token-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.token-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #ddd;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+.token-info {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+
+
 
 @keyframes blink {
     0% { opacity: 1; }
@@ -742,7 +850,7 @@ main {
         margin-top: 1.5rem;
     }*/
     
-    .chart-container {
+    .about-chart-container {
         width: 90%;
     }
 
@@ -790,8 +898,8 @@ main {
     }
 
     .hero-link {
-        font-size: 0.9rem;          /* Smaller font */
-        padding: 0.6rem 1.2rem;     /* Reduced padding */
+        font-size: 0.8rem;          /* Smaller font */
+        padding: 0.4rem     /* Reduced padding */
     }
 
     .nav-links {

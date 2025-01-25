@@ -1,8 +1,15 @@
 // Create radar chart using Recharts
 window.onload = function() {
-    const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } = Recharts;
-
-    // Add the wrapper div and image
+    const {
+        RadarChart,
+        PolarGrid,
+        PolarAngleAxis,
+        PolarRadiusAxis,
+        Radar,
+        ResponsiveContainer
+    } = window.Recharts;
+ 
+    // Add the wrapper div and image 
     const chartContainer = document.getElementById('radar-chart');
     chartContainer.innerHTML = ''; // Clear loading message
     
@@ -14,7 +21,7 @@ window.onload = function() {
     
     // Create image
     const img = document.createElement('img');
-    img.src = 'assets/chart_bg_with_text.png';
+    img.src = '../../assets/chart_bg_with_text.png';
     img.alt = 'Dolla Llama';
     img.className = 'w-full h-auto';
     wrapper.appendChild(img);
@@ -67,8 +74,8 @@ window.onload = function() {
                 tick: { 
                     fill: '#fff',
                     fontSize: '.7rem',
-                    fontFamily: 'Roboto',
-                    opacity: 0.75,
+                    fontFamily: 'Fira Code',
+                    opacity: 0.9,
                     textAnchor: 'middle',
                     dy: 5
                 }

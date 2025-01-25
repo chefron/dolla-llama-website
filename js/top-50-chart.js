@@ -1,4 +1,4 @@
-// Terminal animation functions
+// Terminal animation functions remain unchanged
 function createTerminalLine(text, delay = 0, extraClass = '') {
     const line = document.createElement('div');
     line.className = `analysis-line ${extraClass}`.trim();
@@ -16,34 +16,34 @@ async function animateTerminal(dollaSongs, top50Songs) {
     
     terminal.innerHTML = '';
     let delay = 0;
-    const delayIncrement = 100;
+    const delayIncrement = 300;
 
     function getProgressBar(value) {
         if (value == null) return '';
-        const bars = Math.round(value / 10);
-        return `[${'█'.repeat(bars)}${'.'.repeat(10-bars)}]`;
+        const filled = Math.round(value / 10);
+        return `[${'■'.repeat(filled)}${('·').repeat(10-filled)}]`; // Square blocks and dots
     }
 
     // Add intro lines
     const introLines = [
-        "> INITIALIZING AUDIO ANALYSIS ALGORITHM...",
+        "> INITIALIZING ALGORITHM...",
         "> PROCESSING WAVEFORM DATA...",
         "> BEGINNING ANALYSIS..."
     ];
 
     introLines.forEach(line => {
         terminal.appendChild(createTerminalLine(line, delay));
-        delay += delayIncrement;
+        delay += delayIncrement * 2;
     });
 
     // Process Dolla Llama songs
+    terminal.appendChild(createTerminalLine("\u00A0", delay));
     terminal.appendChild(createTerminalLine("\n> ANALYZING DOLLA LLAMA CATALOG...", delay, 'dolla-terminal-line'));
     delay += delayIncrement * 2;
 
     for (const song of dollaSongs) {
         if (!song || !song.Song) continue;
         
-        // Add blank line before each track (except the first one)
         terminal.appendChild(createTerminalLine("\u00A0", delay, 'dolla-terminal-line'));
         delay += delayIncrement;
         
@@ -78,19 +78,15 @@ async function animateTerminal(dollaSongs, top50Songs) {
         });
     }
 
-        // After processing Dolla's songs...
-
-    // Process Top 50 songs (but only show top 10)
-    terminal.appendChild(createTerminalLine("\n\u00A0", delay));  // Extra blank line between sections
+    terminal.appendChild(createTerminalLine("\n\u00A0", delay));
     terminal.appendChild(createTerminalLine("\n> ANALYZING SPOTIFY TOP 50 USA...", delay));
     delay += delayIncrement * 2;
 
-    const topTenSongs = top50Songs.slice(0, 10);  // Get first 10 songs
+    const topTenSongs = top50Songs.slice(0, 10);
     
     for (const song of topTenSongs) {
         if (!song || !song.Song) continue;
         
-        // Add blank line before each track
         terminal.appendChild(createTerminalLine("\u00A0", delay));
         delay += delayIncrement;
         
@@ -125,24 +121,57 @@ async function animateTerminal(dollaSongs, top50Songs) {
         });
     }
 
-    // Add summary message for remaining songs
     terminal.appendChild(createTerminalLine("\u00A0", delay));
     delay += delayIncrement;
     terminal.appendChild(createTerminalLine("> ANALYSIS TRUNCATED...", delay));
     delay += delayIncrement;
     terminal.appendChild(createTerminalLine(`> ${top50Songs.length - 10} MORE TRACKS IN CURRENT TOP 50`, delay));
 }
+
 // Main chart code
 window.onload = async function() {
     const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Legend } = Recharts;
 
-    // Get container and clear it
     const chartContainer = document.getElementById('top-50-chart');
     chartContainer.innerHTML = '';
     
-    // Create single wrapper with class
+    // Create wrapper div
     const wrapper = document.createElement('div');
-    wrapper.className = 'data-page-chart';
+    wrapper.className = 'relative w-full';
+    wrapper.style.maxWidth = '100%';
+    wrapper.style.margin = '0 auto';
+
+    // Create image
+    const img = document.createElement('img');
+    img.src = '../../assets/chart_bg.png';
+    img.alt = 'Dolla Llama';
+    img.className = 'w-full h-auto';
+    img.style.border = '2px solid #E4E4E4';
+    img.style.borderRadius = '8px';
+    img.style.boxShadow = '0 0 20px #a020f04b';
+    wrapper.appendChild(img);
+
+    // Create outer chart div
+    const outerChartDiv = document.createElement('div');
+    outerChartDiv.style.position = 'absolute';
+    outerChartDiv.style.left = '55%';
+    outerChartDiv.style.top = '62%';
+    outerChartDiv.style.transform = 'translate(-50%, -50%)';
+    outerChartDiv.style.width = '75%';
+    outerChartDiv.style.height = '75%';
+    outerChartDiv.style.overflow = 'visible';
+
+    // Create inner chart div
+    const innerChartDiv = document.createElement('div');
+    innerChartDiv.style.position = 'absolute';
+    innerChartDiv.style.left = '50%';
+    innerChartDiv.style.top = '50%';
+    innerChartDiv.style.transform = 'translate(-50%, -50%)';
+    innerChartDiv.style.width = '100%';
+    innerChartDiv.style.height = '100%';
+
+    outerChartDiv.appendChild(innerChartDiv);
+    wrapper.appendChild(outerChartDiv);
     chartContainer.appendChild(wrapper);
 
     // Default data in case loading fails
@@ -179,13 +208,13 @@ window.onload = async function() {
             const dollaData = dollaResult.data[0];
             
             chartData = [
-                { subject: 'Danceable', top50: top50Data.Danceable, dolla: dollaData.Danceable },
-                { subject: 'Energetic', top50: top50Data.Energetic, dolla: dollaData.Energetic },
-                { subject: 'Live', top50: top50Data.Live, dolla: dollaData.Live },
-                { subject: 'Acoustic', top50: top50Data.Acoustic, dolla: dollaData.Acoustic },
-                { subject: 'Happy', top50: top50Data.Happy, dolla: dollaData.Happy },
-                { subject: 'Speechy', top50: top50Data.Speechy, dolla: dollaData.Speechy },
-                { subject: 'Instrumental', top50: top50Data.Instrumental, dolla: dollaData.Instrumental }
+                { subject: 'DANCEABLE', top50: top50Data.Danceable, dolla: dollaData.Danceable },
+                { subject: 'ENERGETIC', top50: top50Data.Energetic, dolla: dollaData.Energetic },
+                { subject: 'LIVE', top50: top50Data.Live, dolla: dollaData.Live },
+                { subject: 'ACOUSTIC', top50: top50Data.Acoustic, dolla: dollaData.Acoustic },
+                { subject: 'HAPPY', top50: top50Data.Happy, dolla: dollaData.Happy },
+                { subject: 'SPEECHY', top50: top50Data.Speechy, dolla: dollaData.Speechy },
+                { subject: 'INSTRUMENTAL', top50: top50Data.Instrumental, dolla: dollaData.Instrumental }
             ];
         }
 
@@ -209,13 +238,11 @@ window.onload = async function() {
         });
 
         if (dollaFullData.data.length > 0 && top50FullData.data.length > 0) {
-            // Start terminal animation with both catalogs
             animateTerminal(dollaFullData.data, top50FullData.data);
         }
 
     } catch (error) {
         console.error('Error loading data:', error);
-        // Using default data if there's an error
     }
 
     const Chart = React.createElement(ResponsiveContainer, { width: "100%", height: "100%" },
@@ -235,8 +262,8 @@ window.onload = async function() {
                 tick: { 
                     fill: '#fff',
                     fontSize: '.8em',
-                    fontFamily: 'Fira Code',
-                    opacity: 0.9,
+                    fontFamily: 'JetBrains Mono',
+                    opacity: 1,
                     textAnchor: 'middle',
                     dy: 5
                 }
@@ -250,22 +277,21 @@ window.onload = async function() {
             React.createElement(Radar, {
                 name: "Top 50",
                 dataKey: "top50",
-                stroke: "#00ff00",
+                stroke: "#a020f0",
                 strokeWidth: 3,
-                fill: "#00ff00",
+                fill: "#a020f0",
                 fillOpacity: 0.2
             }),
             React.createElement(Radar, {
                 name: "Dolla Llama",
                 dataKey: "dolla",
-                stroke: "#ff0000",
+                stroke: "#edda1c",
                 strokeWidth: 3,
-                fill: "#ff0000",
+                fill:"#edda1c",
                 fillOpacity: 0.35
             })
         )
     );
 
-    // Render the chart into the wrapper
-    ReactDOM.render(Chart, wrapper);
+    ReactDOM.render(Chart, innerChartDiv);
 };
