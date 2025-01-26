@@ -17,7 +17,6 @@ body {
 }
 
 .overlay {
-    position: fixed;  /* Change to fixed */
     width: 100%;
     height: 100%;
     top: 0;
@@ -25,12 +24,11 @@ body {
     background: linear-gradient(
         to right,
         rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.25) 25%,
-        rgba(0, 0, 0, 0.25) 75%,
+        rgba(0, 0, 0, 0.35) 25%,
+        rgba(0, 0, 0, 0.35) 75%,
         rgba(0, 0, 0, 0)
     );
     z-index: 1;
-    pointer-events: none;
 }
 
 .no-scroll {
@@ -46,26 +44,27 @@ body.music-page {
     background-image: url('../assets/dolla_music_bg_large.png');
     background-position: 80% center; 
     background-size: auto;
+    overflow: hidden;
 }
 
 body.videos-page {
     background-image: none;
+    overflow: hidden;
 }
 
 body.about-page {
-    background-color: black;
-    background-image: 
-      radial-gradient(circle at center, 
-        rgba(0, 0, 0, 0.34) 0%, 
-        rgba(0, 0, 0, 0) 70%
-      ),
-      url('../assets/dolla_on_car.png');
-      background-size: cover;
+    background-image: url('../assets/dolla_on_car.png');
+    background-size: cover;
+}
+
+body.collab-page {
+    background-image: url('../assets/dolla_studio.png');
+    background-size: cover;
 }
 
 /* Navigation styles */
 nav {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     position: sticky;
@@ -137,7 +136,7 @@ nav {
     font-weight: 800;
     position: relative;
     z-index: 1;
-    background: linear-gradient(45deg,  #f2f2f2,  #f2f2f2, #edda1c,  #f2f2f2,  #f2f2f2, #a020f0, #f2f2f2,  #f2f2f2);
+    background: linear-gradient(45deg,  #f2f2f2,  #f2f2f2,  #f2f2f2, #a020f0, #f2f2f2,  #f2f2f2);
     background-size: 300% auto;
     background-clip: text;
     -webkit-background-clip: text;
@@ -175,11 +174,10 @@ nav {
 /* Main content styles */
 main {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden;
 }
 
 .hero-section {
@@ -189,7 +187,7 @@ main {
     padding-right: calc(300px + 8rem);
     padding-left: 4rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 8rem);
@@ -369,6 +367,7 @@ main {
     display: flex;
     align-items: center;
     animation: fadeInBottom 0.3s ease-in-out;
+    z-index: 2;
 }
 
 .bottom-nav .nav-links {
@@ -578,7 +577,7 @@ main {
     margin: 0 auto;
 }
 
-.about-text p{
+.about-text p {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.3rem;
     color: 	#f2f2f2;
@@ -623,7 +622,17 @@ main {
     border-radius: 8px;
     box-shadow: 0 0 20px #a020f04b;
     background: rgba(30, 30, 30, 0.8);
-  }
+}
+
+.dolla-text {
+    color: #edda1c;
+    text-shadow: 1x 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.other-text {
+    color: #a020f0;
+    text-shadow: 1x 1px 2px rgba(0, 0, 0, 0.5);
+}
 
 .audio-analysis-wrapper {
     width: 100%;
@@ -634,7 +643,6 @@ main {
     align-items: flex-start;
     padding: 2rem;
     gap: 6rem;
-    
 }
 
 .comparison-chart-header {
@@ -722,40 +730,101 @@ main {
 
 
 /* llamagang.html */
-.token-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.token-card {
-    background: white;
+.token-header {
+    font-family: "Bebas Neue", serif;
+    color: #edda1c;
+    text-align: center;
+    font-size: 1.8rem;
+    padding: .5rem;
+    margin-top: 3rem;
+    border: 1px solid #363636;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
+    box-shadow: 0 0 20px #a020f04b;
+    background: rgba(30, 30, 30, 0.8);
+  }
 
-table {
+.token-wrapper {
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 2rem;
+    margin-top: 1rem;
 }
 
-th, td {
-    padding: 12px;
-    text-align: right;
-    border-bottom: 1px solid #ddd;
+.token-chart-container {
+    border-radius: 8px;
+    padding: 1em;
+    font-family: "JetBrains Mono", monospace;
+    color: #808080;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid  #f2f2f2;
+    border-radius: 8px;
+    background: #1e1e1ecb;
+    box-shadow: 0 0 20px #a020f04b;
+    transition: box-shadow 0.3s ease;
+    width: 70%;
+    height: 80%;
+    opacity: .95;
 }
 
-th:first-child, td:first-child {
-    text-align: left;
+.token-text-container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.token-info {
-    font-size: 1.1em;
-    line-height: 1.6;
+.token-text-header {
+    font-family: 'JetBrains Mono', monospace;
+    color:  #f2f2f2;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #a020f04b;
+    background: rgba(30, 30, 30, 0.8);
 }
 
+.token-text {
+    font-family: "JetBrains Mono", monospace;
+    padding: 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #a020f04b;
+    background: rgba(30, 30, 30, 0.8);
+    font-size: 1.1rem;
+    color: 	#f2f2f2;
+    text-shadow: 1x 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.token-text p {
+    margin-bottom: 1.1rem;
+}
+
+.token-text ol {
+    padding-left: 2rem;
+}
+
+.coming-soon {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.coming-soon p {
+    font-family: "Bebas Neue", serif;
+    font-size: clamp(3.5rem, 5vw, 4rem);
+    color: #f2f2f2;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 
 
