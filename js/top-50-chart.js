@@ -131,49 +131,10 @@ async function animateTerminal(dollaSongs, top50Songs) {
 // Main chart code
 window.onload = async function() {
     const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Legend } = Recharts;
-
-    const chartContainer = document.getElementById('top-50-chart');
-    chartContainer.innerHTML = '';
     
-    // Create wrapper div
-    const wrapper = document.createElement('div');
-    wrapper.className = 'relative w-full';
-    wrapper.style.maxWidth = '100%';
-    wrapper.style.margin = '0 auto';
-
-    // Create image
-    const img = document.createElement('img');
-    img.src = '../../assets/chart_bg.png';
-    img.alt = 'Dolla Llama';
-    img.className = 'w-full h-auto';
-    img.style.border = '2px solid #E4E4E4';
-    img.style.borderRadius = '8px';
-    img.style.boxShadow = '0 0 20px #a020f04b';
-    wrapper.appendChild(img);
-
-    // Create outer chart div
-    const outerChartDiv = document.createElement('div');
-    outerChartDiv.style.position = 'absolute';
-    outerChartDiv.style.left = '55%';
-    outerChartDiv.style.top = '62%';
-    outerChartDiv.style.transform = 'translate(-50%, -50%)';
-    outerChartDiv.style.width = '75%';
-    outerChartDiv.style.height = '75%';
-    outerChartDiv.style.overflow = 'visible';
-
-    // Create inner chart div
-    const innerChartDiv = document.createElement('div');
-    innerChartDiv.style.position = 'absolute';
-    innerChartDiv.style.left = '50%';
-    innerChartDiv.style.top = '50%';
-    innerChartDiv.style.transform = 'translate(-50%, -50%)';
-    innerChartDiv.style.width = '100%';
-    innerChartDiv.style.height = '100%';
-
-    outerChartDiv.appendChild(innerChartDiv);
-    wrapper.appendChild(outerChartDiv);
-    chartContainer.appendChild(wrapper);
-
+    // Get the container where the chart will be rendered
+    const chartInner = document.querySelector('.chart-inner');
+    
     // Default data in case loading fails
     let chartData = [
         { subject: 'Danceable', top50: 80, dolla: 70 },
@@ -293,5 +254,5 @@ window.onload = async function() {
         )
     );
 
-    ReactDOM.render(Chart, innerChartDiv);
+    ReactDOM.render(Chart, chartInner);
 };

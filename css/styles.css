@@ -618,13 +618,13 @@ main {
 }*/
 
 .data-header {
+    width: fit-content;
     font-family: 'JetBrains Mono', monospace;
     color:  #f2f2f2;
     text-align: center;
     font-size: 1.1rem;
     padding: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 3rem;
+    margin: 3rem auto 1rem;
     border: 1px solid #363636;
     border-radius: 8px;
     box-shadow: 0 0 20px #a020f04b;
@@ -650,6 +650,7 @@ main {
     align-items: flex-start;
     padding: 2rem;
     gap: 6rem;
+    margin-bottom: 60px;
 }
 
 .comparison-chart-header {
@@ -769,6 +770,7 @@ main {
     padding: 2rem;
     gap: 2rem;
     margin-top: 1rem;
+    margin-bottom: 60px;
 }
 
 .token-chart-container {
@@ -873,6 +875,46 @@ main {
     }
 }
 
+/*data.html styles */
+#top-50-chart {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.chart-background {
+    width: 100%;
+    height: auto;
+    border: 2px solid #E4E4E4;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #a020f04b;
+}
+
+.chart-container {
+    position: absolute;
+    left: 55%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 75%;
+    overflow: visible;
+}
+
+.chart-inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+
 @media (max-width: 1280px) {
     
     .main-song-preview {
@@ -951,6 +993,7 @@ main {
     .comparison-chart-title {
         font-size: 1rem;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -1048,7 +1091,6 @@ main {
         padding: .5rem;
         margin-top: .5rem;
         gap: 1.3rem;
-        margin-bottom: 60px;
     }
 
     .token-header {
@@ -1100,6 +1142,9 @@ main {
        margin-top: 4vh;
     }
 
+    .comparison-chart-wrapper {
+        width: 90%;
+    }
 
     .about-section {
         width: 90vw;
@@ -1108,10 +1153,50 @@ main {
 
     .audio-analysis-wrapper {
         flex-direction: column;
-    
-        padding: 2rem;
-        gap: 6rem;
+        align-items: center;
+        padding: .5rem;
+        gap: 1rem;
     }
+
+
+
+    .data-header {
+        font-size: .8rem;
+        margin-top: 1rem;
+        padding: .5rem;
+        width: 86%;
+        margin: 1rem auto;
+    }
+
+   
+    .chart-container {
+        width: 90%;
+        height: 90%;
+    }
+    
+    .chart-container text {
+        font-size: 10px;
+    }
+
+    .terminal-container {
+        width: 90%;
+        font-size: .7rem;
+
+        border-radius: 8px;
+        padding: 1em;
+        font-family: "JetBrains Mono", monospace;
+        color: #808080;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid  #f2f2f2;
+        border-radius: 8px;
+        background: #1e1e1ecb;
+        box-shadow: 0 0 20px #a020f04b;
+        transition: box-shadow 0.3s ease;
+    }
+
+  
 
 
     @media (max-width: 768px) and (orientation: landscape) {
