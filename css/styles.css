@@ -529,7 +529,7 @@ main {
     left: 0;
     width: 100%;
     height: 100vh;
-    padding: 4rem 0;
+    padding: 3.8rem 0;
     box-sizing: border-box;
 }
 
@@ -751,26 +751,28 @@ main {
 
 /* llamagang.html */
 .token-header {
-    font-family: "Bebas Neue", serif;
     text-align: center;
-    font-size: 1.8rem;
-    padding: .5rem;
+    padding: .75rem;
     margin: 3rem auto 0;
     border: 1px solid #363636;
-    border-radius: 8px;
     box-shadow: 0 0 20px #a020f04b;
     background: rgba(30, 30, 30, 0.8);
-    width: 70%;
-    max-width: 800px;
+    width: 100%;
 }
 
 .token-header h1 {
-    color: #f2f2f2;
+    font-family: "Bebas Neue", serif;
+    font-size: 1.5rem;
+    color: #edda1c;
 }
 
 .token-header h2 {
-    color: #edda1c;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    color: #f2f2f2;
 }
+
+
 
 .token-wrapper {
     width: 100%;
@@ -781,7 +783,7 @@ main {
     align-items: flex-start;
     padding: 2rem;
     gap: 2rem;
-    margin-top: 1rem;
+    margin-top: .75rem;
     margin-bottom: 60px;
 }
 
@@ -1147,10 +1149,13 @@ main {
     }
 
     .token-header {
-        width: 85%; /* Wider on mobile to maintain readability */
-        font-size: 1rem; /* Slightly smaller font on mobile */
         padding: .4rem;
-        margin: 1.4rem auto 0; /* Slightly reduced margin on mobile */
+        margin: 1.4rem auto 0;
+        border-radius: 0;
+    }
+
+    .token-header h2 {
+        font-size: .7rem;
     }
 
     .token-chart {
@@ -1236,7 +1241,9 @@ main {
         font-size: .7rem;
     }
 
-  
+    .about-text p {
+        font-size: 1rem;
+    }
 
 
     @media (max-width: 768px) and (orientation: landscape) {
