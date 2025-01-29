@@ -617,7 +617,7 @@ nav {
 /* Token Page Styles */
 .token-header {
     width: 100%;
-    margin: 3rem auto 0;
+    margin: 0rem auto 0;
     padding: .75rem;
     text-align: center;
     border: 1px solid #363636;
@@ -634,15 +634,15 @@ nav {
 .token-header h2 {
     font-family: "JetBrains Mono", monospace;
     font-size: 1rem;
-    color: #f2f2f2;
+    color: #edda1c;
 }
 
 .token-wrapper {
     width: 100%;
     height: auto;
     padding: 2rem;
-    gap: 2rem;
-    margin-top: .75rem;
+    gap: 6rem;
+    margin-top: 3rem;
     margin-bottom: 60px;
     display: flex;
     flex-direction: row;
@@ -650,8 +650,21 @@ nav {
     align-items: flex-start;
 }
 
+.token-info-container {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.token-stats-container {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+
 .token-text-container {
-    width: 30%;
+    width: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -659,6 +672,7 @@ nav {
 
 .token-text-header {
     padding: 1rem;
+    margin-bottom: -.75rem;
     border: 1px solid #363636;
     border-radius: 8px;
     font-family: 'JetBrains Mono', monospace;
@@ -670,11 +684,11 @@ nav {
 }
 
 .token-text {
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
     border: 1px solid #363636;
     border-radius: 8px;
     font-family: "JetBrains Mono", monospace;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: 	#f2f2f2;
     text-shadow: 1x 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 20px #a020f04b;
@@ -685,8 +699,62 @@ nav {
     margin-bottom: 1.1rem;
 }
 
+.token-allocation-section-header {
+    width: 100%;
+    margin: 3rem auto 0;
+    padding: .75rem;
+    text-align: center;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    box-shadow: 0 0 20px #a020f04b;
+}
+
+.token-allocation-section-header h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.5rem;
+    color: #f2f2f2;
+}
+
+.token-allocation-outer-wrapper {
+    width: 100%;
+    margin-top: .75rem;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.token-allocation-chart-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    box-shadow: 0 0 20px #a020f04b;
+}
+
+.token-allocation-chart-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.token-allocation-chart-title {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 24px;
+    fill: #f2f2f2;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.token-allocation-legend text {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    fill: #f2f2f2;
+}
+
 .token-chart-container {
-    width: 60%;
+    width: 100%;
     height: 80%;
     min-height: 300px;
     padding: 1em;
@@ -704,6 +772,74 @@ nav {
 
 .token-chart {
     min-height: 400px;
+}
+
+.stats-header {
+    width: 100%;
+    margin: 3rem auto 0;
+    padding: .75rem;
+    text-align: center;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    box-shadow: 0 0 20px #a020f04b;
+}
+
+.stats-header h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.5rem;
+    color: #f2f2f2;
+}
+
+.stats-wrapper {
+    width: 100%;
+    margin-top: .75rem;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.stats-container {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.stat-box {
+    padding: 1rem;
+    border: 1px solid #363636;
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    box-shadow: 0 0 20px #a020f04b;
+}
+
+.stat-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    color: #808080;
+}
+
+.stat-value {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.5rem;
+    color: #f2f2f2;
+    margin-top: 0.5rem;
+}
+
+.stat-change {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.stat-change.positive {
+    color: #edda1c;
+}
+
+.stat-change.negative {
+    color: #ff4444;
 }
 
 /* About Page Styles */

@@ -47,31 +47,100 @@
     </nav>
     <main class="overlay">
         <div class="token-header">
-            <h1><a href="https://pump.fun/coin/Ex5F1bfGE4nnbMut7VTBFx8eFq4Z9mkhKvCsTdeHpump">buy $llamagang on pump.fun</a></h1>
-            <h2>CA: Ex5F1bfGE4nnbMut7VTBFx8eFq4Z9mkhKvCsTdeHpump</h2>
+            <h2><a href="https://pump.fun/coin/Ex5F1bfGE4nnbMut7VTBFx8eFq4Z9mkhKvCsTdeHpump">BUY $LLAMAGANG ON PUMP.FUN</a></h2>
         </div>
         <div class="token-wrapper">
-            <div class="token-text-container">
-                <div class="token-text-header">TOKENOMICS</div>
-                <div class="token-text">
-                    <p>> all streaming streaming revenue goes toward buybacks. more streams = more tokens burned = higher token value. </p>
-                    <p>> holders are incentivized to stream and share</p>
-                    <p>> better music = better returns</p>
-                    <p>> total supply = 1 billion tokens. shrinks with every stream</p>
-                    <p>> no unlocks. no surprises. just pure demand-driven tokenomics.</p>
+            <div class="token-info-container">
+                <div class="token-text-container">
+                    <div class="token-text-header">TOKENOMICS</div>
+                    <div class="token-text">
+                        <p>> all streaming streaming revenue goes toward buybacks. more streams = more tokens burned = higher token value. </p>
+                        <p>> holders are incentivized to stream and share</p>
+                        <p>> better music = better returns</p>
+                        <p>> total supply = 1 billion tokens. shrinks with every stream</p>
+                        <p>> no unlocks. no surprises. just pure demand-driven tokenomics.</p>
+                    </div>
+                </div>
+                <div class="token-allocation-section-header">
+                    <h2>TOKEN ALLOCATION</h2>
+                </div>
+                <div class="token-allocation-outer-wrapper">
+                    <div class="token-allocation-chart-container">
+                        <svg viewBox="0 0 400 400">
+                            <!-- Background circle -->
+                            <circle cx="200" cy="200" r="195" fill="rgba(30, 30, 30, 0.8)" />
+                            
+                            <!-- Pie chart segments -->
+                            <!-- Treasury: 15% (54 degrees) -->
+                            <path d="M200 200 L200 5 A195 195 0 0 1 368.97 98.67 Z" 
+                                  fill="#f2f2f2" />
+                            
+                            <!-- Team: 15% (54 degrees) -->
+                            <path d="M200 200 L368.97 98.67 A195 195 0 0 1 368.97 301.33 Z" 
+                                  fill="#a020f0" />
+                            
+                            <!-- Fans: 70% (252 degrees) -->
+                            <path d="M200 200 L368.97 301.33 A195 195 0 1 1 200 5 Z" 
+                                  fill="#edda1c" />
+                            
+                            <!-- Center circle -->
+                            <circle cx="200" cy="200" r="130" fill="rgba(30, 30, 30, 0.8)" />
+                            
+                            <!-- Legend -->
+                            <g class="token-allocation-legend" transform="translate(135, 170)">
+                                <rect x="0" y="0" width="15" height="15" fill="#edda1c" />
+                                <text x="25" y="12">Fans (70%)</text>
+                                
+                                <rect x="0" y="25" width="15" height="15" fill="#a020f0" />
+                                <text x="25" y="37">Team (15%)</text>
+                                
+                                <rect x="0" y="50" width="15" height="15" fill="#f2f2f2" />
+                                <text x="25" y="62">Treasury (15%)</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>                
+            </div>
+            <div class="token-stats-container">
+                <div class="token-chart-container">
+                    <iframe
+                    height="100%"
+                    class="token-chart"
+                    src="https://birdeye.so/tv-widget/Ex5F1bfGE4nnbMut7VTBFx8eFq4Z9mkhKvCsTdeHpump?chain=solana&viewMode=pair&chartInterval=15&chartType=Candle&chartTimezone=America%2FLos_Angeles&chartLeftToolbar=show&theme=dark" 
+                    frameborder="0" 
+                    allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="stats-header">
+                    <h2>PERFORMANCE METRICS</h2>
+                </div>
+                <div class="stats-wrapper">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-label">Spotify Earnings</div>
+                            <div class="stat-value">$0</div>
+                            <div class="stat-change positive">+0%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">YouTube Earnings</div>
+                            <div class="stat-value">$0</div>
+                            <div class="stat-change positive">+0%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Total Earnings</div>
+                            <div class="stat-value">$0</div>
+                            <div class="stat-change positive">+0%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Tokens Burned</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-change positive">+0%</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="token-chart-container">
-                <iframe
-                height="100%"
-                class="token-chart"
-                src="https://birdeye.so/tv-widget/Ex5F1bfGE4nnbMut7VTBFx8eFq4Z9mkhKvCsTdeHpump?chain=solana&viewMode=pair&chartInterval=15&chartType=Candle&chartTimezone=America%2FLos_Angeles&chartLeftToolbar=show&theme=dark" 
-                frameborder="0" 
-                allowfullscreen>
-                </iframe>
             </div>
         </div>
-    </main>
     </main>
     <div class="bottom-nav">
         <div class="nav-links">
@@ -114,5 +183,6 @@
         </div>
     </div>
 <script src="../../js/menu.js"></script>
+<script src="../../js/token-stats-table.js"></script>
 </body>
 </html>
