@@ -617,7 +617,8 @@ nav {
 /* Token Page Styles */
 .token-header {
     width: 100%;
-    margin: 0rem auto 0;
+    position: absolute;
+    top: 0;
     padding: .75rem;
     text-align: center;
     border: 1px solid #363636;
@@ -632,9 +633,16 @@ nav {
 }
 
 .token-header h2 {
+    width: fit-content;
+    margin: 0 auto;
     font-family: "JetBrains Mono", monospace;
     font-size: 1rem;
     color: #edda1c;
+    transition: transform 0.2s ease;
+}
+
+.token-header h2:hover {
+    transform: scale(1.05);
 }
 
 .token-wrapper {
@@ -642,7 +650,7 @@ nav {
     height: auto;
     padding: 2rem;
     gap: 6rem;
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-bottom: 60px;
     display: flex;
     flex-direction: row;
@@ -651,13 +659,13 @@ nav {
 }
 
 .token-info-container {
-    width: 25%;
+    width: 27%;
     display: flex;
     flex-direction: column;
 }
 
 .token-stats-container {
-    width: 55%;
+    width: 57%;
     display: flex;
     flex-direction: column;
 }
@@ -701,6 +709,7 @@ nav {
 
 .token-allocation-section-header {
     width: 100%;
+    max-width: 500px;
     margin: 3rem auto 0;
     padding: .75rem;
     text-align: center;
@@ -719,7 +728,7 @@ nav {
 .token-allocation-outer-wrapper {
     width: 100%;
     margin-top: .75rem;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
 }
@@ -755,8 +764,7 @@ nav {
 
 .token-chart-container {
     width: 100%;
-    height: 80%;
-    min-height: 300px;
+    position: relative;
     padding: 1em;
     border: 2px solid  #f2f2f2;
     border-radius: 8px;
@@ -770,8 +778,10 @@ nav {
     opacity: .95;
 }
 
-.token-chart {
-    min-height: 400px;
+.token-chart-container iframe {
+    position: relative;
+    min-height: 450px;
+    overflow: hidden;
 }
 
 .stats-header {
@@ -794,7 +804,7 @@ nav {
 .stats-wrapper {
     width: 100%;
     margin-top: .75rem;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: center;
 }
@@ -809,7 +819,7 @@ nav {
 
 .stat-box {
     padding: 1rem;
-    border: 1px solid #363636;
+    border: 2px solid  #f2f2f2;
     border-radius: 8px;
     background: rgba(30, 30, 30, 0.8);
     box-shadow: 0 0 20px #a020f04b;
@@ -995,25 +1005,37 @@ nav {
         gap: 1.3rem;
     }
 
-    .token-header {
-        padding: .4rem;
-        margin: 1.4rem auto 0;
-        border-radius: 0;
-    }
-
     .token-header h2 {
         font-size: .7rem;
     }
 
+    .token-info-container {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .token-stats-container {
+        width: 90%;
+        margin-top: 3rem;
+    }
+
+    .token-allocation-section-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .token-chart {
-        min-height: 250px;
+        min-height: 265px;
     }
     
     .token-text-container {
-        width: 90%;
+        width: 100%;
         font-size: 1rem;
         padding: .2rem;
-        margin-top: 1rem;
     }
 
     .token-text-header {
@@ -1031,10 +1053,8 @@ nav {
     }
 
     .token-chart-container {
-        padding: .5em;
-        width: 90%;
-        height: 80%;
-        height: 100px !important;
+        width: 100%;
+        height: 100%;
     }
 
     .audio-analysis-wrapper {
@@ -1146,21 +1166,38 @@ nav {
         background-position: center 20%;
     }
 
-    .about-header {
-        font-size: 2.6rem;
-        margin-top: 4vh;
+    .token-chart-container iframe {
+        min-height: 270px;
     }
 
-    .about-section {
-        width: 90vw;
-        margin: 0 auto;
+    .stats-header {
+        margin-top: 2rem;
+    }
+
+    .stats-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .stats-container {
+       gap: .75rem;
+    }
+    
+    .stat-box {
+        padding: .7rem;
+    }
+
+    .stat-label {
+        font-size: .8rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
     }
 
     .data-header {
         font-size: .8rem;
         margin-top: 1rem;
         padding: .5rem;
-        
         margin: 1rem auto;
     }
 
@@ -1171,6 +1208,16 @@ nav {
     
     .chart-container text {
         font-size: 10px;
+    }
+
+    .about-header {
+        font-size: 2.6rem;
+        margin-top: 4vh;
+    }
+
+    .about-section {
+        width: 90vw;
+        margin: 0 auto;
     }
 
     .about-text p {
