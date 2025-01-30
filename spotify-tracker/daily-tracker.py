@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import schedule
 import time
 import os
 from datetime import datetime
@@ -16,59 +15,98 @@ def time_to_seconds(time_str):
 
 def export_playlist_data(playlist_uri):
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    print(f"Script directory: {script_dir}")
 
     # Clean up existing files
     for filename in os.listdir(script_dir):
-        if filename.startswith("Top 50 - USA") and filename.endswith(".csv"):
+        if filename.startswith("Billboard Hot 100") and filename.endswith(".csv"):
             try:
                 os.remove(os.path.join(script_dir, filename))
+                print(f"Removed old file: {filename}")
             except Exception as e:
                 print(f"Error removing old file {filename}: {str(e)}")
     
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--window-size=1920,1080')
+    
     prefs = {
         "download.default_directory": script_dir,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
-        "safebrowsing.enabled": True
+        "safebrowsing.enabled": True,
+        "profile.default_content_settings.popups": 0
     }
     chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    
+    print("Creating Chrome driver...")
+    
+    # Start Xvfb
+    from xvfbwrapper import Xvfb
+    print("Starting Xvfb...")
+    vdisplay = Xvfb()
+    vdisplay.start()
     
     service = Service('/usr/local/bin/chromedriver')
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = None
     
     try:
-        driver.get("https://www.chosic.com/spotify-playlist-analyzer/")
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        print("Chrome driver created successfully")
+        driver.set_page_load_timeout(30)
+        driver.implicitly_wait(20)
         
-        search_field = WebDriverWait(driver, 10).until(
+        print("Navigating to website...")
+        driver.get("https://www.chosic.com/spotify-playlist-analyzer/")
+        print("Website loaded successfully")
+        
+        print("Looking for search field...")
+        search_field = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.ID, "search-word"))
         )
         search_field.send_keys(playlist_uri)
+        print("Found and filled search field")
         
+        print("Looking for analyze button...")
         analyze_button = driver.find_element(By.ID, "analyze")
         analyze_button.click()
+        print("Clicked analyze button")
         
-        WebDriverWait(driver, 30).until(
+        print("Waiting for results table...")
+        WebDriverWait(driver, 45).until(
             EC.presence_of_element_located((By.ID, "all-tracks-table"))
         )
+        print("Results table loaded")
+        
+        time.sleep(15)
+        
+        print("Looking for export button...")
+        export_button = driver.find_element(By.ID, "export")
+        driver.execute_script("arguments[0].scrollIntoView(true);", export_button)
+        time.sleep(8)
+        driver.execute_script("arguments[0].click();", export_button)
+        print("Clicked export button")
         
         time.sleep(10)
         
-        export_button = driver.find_element(By.ID, "export")
-        driver.execute_script("arguments[0].scrollIntoView(true);", export_button)
-        time.sleep(5)
-        driver.execute_script("arguments[0].click();", export_button)
-        
-        time.sleep(5)
-        
+    except Exception as e:
+        print(f"Error during execution: {str(e)}")
+        raise
     finally:
         if driver:
+            print("Closing Chrome driver...")
             driver.quit()
+            print("Chrome driver closed")
+        vdisplay.stop()
+        print("Stopped Xvfb")
 
 def process_data():
     """Process the downloaded CSV and extract averages"""
     # Read the CSV file
-    df = pd.read_csv('Top 50 - USA.csv')
+    df = pd.read_csv('Billboard Hot 100.csv')
     
     # Rename columns
     header_changes = {
@@ -110,7 +148,7 @@ def process_data():
 
 def daily_task():
     """Run the complete daily update process"""
-    playlist_uri = "spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"  # Top 50 USA playlist
+    playlist_uri = "spotify:playlist:6UeSakyzhiEt4NB3UAd6NQ"  # Billboard Hot 100
     try:
         print("Starting daily update...")
         export_playlist_data(playlist_uri)
@@ -121,13 +159,5 @@ def daily_task():
         print(f"Error during daily update: {str(e)}")
 
 if __name__ == "__main__":
-    # Schedule the task to run daily at 1 AM
-    schedule.every().day.at("01:00").do(daily_task)
-    
-    # Run once immediately on script start
+    playlist_uri = "spotify:playlist:6UeSakyzhiEt4NB3UAd6NQ"  # Billboard Hot 100 playlist
     daily_task()
-    
-    # Keep the script running
-    while True:
-        schedule.run_pending()
-        time.sleep(60)

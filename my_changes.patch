@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+index 8196947..3116111 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -5,3 +5,6 @@ __pycache__/
+ **/*.Zone.Identifier
+ spotify-tracker/Top 50 - USA*.csv
+ spotify-tracker/google-chrome-stable_current_amd64.debspotify-tracker/google-chrome-stable_current_amd64.deb
++*.deb
++*.exe
++*.dmg
+\ No newline at end of file

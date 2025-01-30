@@ -4,3 +4,6 @@ __pycache__/
 *.Zone.Identifier
 **/*.Zone.Identifier
 spotify-tracker/Top 50 - USA*.csv
+spotify-tracker/google-chrome-stable_current_amd64.deb
+*.deb
+*.exe
