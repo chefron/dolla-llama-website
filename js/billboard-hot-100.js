@@ -1,4 +1,3 @@
-// Terminal animation functions remain unchanged
 function createTerminalLine(text, delay = 0, extraClass = '') {
     const line = document.createElement('div');
     line.className = `analysis-line ${extraClass}`.trim();
@@ -38,7 +37,7 @@ async function animateTerminal(dollaSongs, top50Songs) {
 
     // Process Dolla Llama songs
     terminal.appendChild(createTerminalLine("\u00A0", delay));
-    terminal.appendChild(createTerminalLine("\n> ANALYZING DOLLA LLAMA CATALOG...", delay, 'dolla-terminal-line'));
+    terminal.appendChild(createTerminalLine("\n> ANALYZING DOLLA LLAMA CATALOG...", delay));
     delay += delayIncrement * 1;
 
     for (const song of dollaSongs) {
@@ -90,7 +89,7 @@ async function animateTerminal(dollaSongs, top50Songs) {
         terminal.appendChild(createTerminalLine("\u00A0", delay));
         delay += delayIncrement;
         
-        terminal.appendChild(createTerminalLine(`> TRACK: "${song.Song}"`, delay));
+        terminal.appendChild(createTerminalLine(`> TRACK: "${song.Song}"`, delay, 'billboard-terminal-line'));
         delay += delayIncrement;
         
         const metrics = [
@@ -112,7 +111,7 @@ async function animateTerminal(dollaSongs, top50Songs) {
                     const text = String(metric.value).includes('%')
                         ? `> ${metric.label.padEnd(12)}: ${metric.value}`
                         : `> ${metric.label.padEnd(12)}: ${metric.value}`;
-                    terminal.appendChild(createTerminalLine(text, delay));
+                    terminal.appendChild(createTerminalLine(text, delay, 'billboard-terminal-line'));
                     delay += delayIncrement;
                 } catch (e) {
                     console.error("Error processing metric:", metric, e);
@@ -180,7 +179,9 @@ window.onload = async function() {
         }
 
         // Load the full catalogs for terminal display
-        const dollaFullResponse = await fetch('../../spotify-tracker/dolla_catalog.csv');
+        const dollaFullResponse = await fetch('../../spotify-tracker/dolla_catalog.csv', {
+            cache: 'no-store'
+        });
         const billboardFullResponse = await fetch('../../spotify-tracker/Billboard Hot 100.csv');
         
         const dollaFullContent = await dollaFullResponse.text();
