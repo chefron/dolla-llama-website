@@ -124,7 +124,7 @@ async function animateTerminal(dollaSongs, top50Songs) {
     delay += delayIncrement;
     terminal.appendChild(createTerminalLine("> ANALYSIS TRUNCATED...", delay));
     delay += delayIncrement;
-    terminal.appendChild(createTerminalLine(`> ${top50Songs.length - 10} MORE TRACKS IN CURRENT TOP 50`, delay));
+    terminal.appendChild(createTerminalLine("> 90 MORE TRACKS IN HOT 100", delay));
 }
 
 // Main chart code

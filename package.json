@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "serve .",
-    "build": "mkdir -p dist && cp -r index.html css js assets pages dist/ && rm -rf dist/node_modules dist/venv dist/spotify-tracker/venv"
+    "build": "mkdir -p dist && cp -r index.html css js assets pages dist/ && mkdir -p dist/spotify-tracker && cp spotify-tracker/*.csv dist/spotify-tracker/ && rm -rf dist/node_modules dist/venv dist/spotify-tracker/venv"
   },
   "keywords": [],
   "author": "",
