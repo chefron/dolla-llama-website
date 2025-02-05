@@ -13,7 +13,7 @@ html, body {
     display: flex;
     flex-direction: column;
     background-color: black;
-    background-image: url('../assets/dolla_concert_bg.png');
+    background-image: url('../assets/dolla_car.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,9 +21,8 @@ html, body {
 
 /* Page-specific backgrounds */
 body.music-page {
-    background-image: url('../assets/dolla_music_bg_large.png');
-    background-position: 80% center; 
-    background-size: auto;
+    background-image: url('../assets/dolla_convertible.png');
+    background-size: cover;
     overflow: hidden;
 }
 
@@ -41,7 +40,7 @@ body.data-bg {
 }
 
 body.about-page {
-    background-image: url('../assets/dolla_on_car.png');
+    background-image: url('../assets/dolla_car.png');
 }
 
 /* Main layout containers */
