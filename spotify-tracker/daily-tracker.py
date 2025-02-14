@@ -84,14 +84,94 @@ def export_playlist_data(playlist_uri):
         time.sleep(15)
         
         print("Looking for export button...")
-        export_button = driver.find_element(By.ID, "export")
-        driver.execute_script("arguments[0].scrollIntoView(true);", export_button)
-        time.sleep(8)
-        driver.execute_script("arguments[0].click();", export_button)
-        print("Clicked export button")
-        
-        time.sleep(10)
-        
+        try:
+            export_button = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.ID, "export"))
+            )
+            print("Found export button")
+            
+            # Try to make sure the button is clickable
+            WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.ID, "export"))
+            )
+            print("Export button is clickable")
+            
+            # Scroll to button
+            driver.execute_script("arguments[0].scrollIntoView(true);", export_button)
+            print("Scrolled to export button")
+            time.sleep(8)
+            
+            # Try direct click first
+            try:
+                export_button.click()
+                print("Clicked export button directly")
+            except Exception as click_error:
+                print(f"Direct click failed: {str(click_error)}")
+                # If direct click fails, try JavaScript click
+                driver.execute_script("arguments[0].click();", export_button)
+                print("Clicked export button via JavaScript")
+            
+            print("Export button clicked successfully")
+            
+            # Now wait for file download
+            print("Waiting for file download...")
+            max_wait = 30
+            start_time = time.time()
+            file_found = False
+            
+            while time.time() - start_time < max_wait:
+                for filename in os.listdir(script_dir):
+                    if filename.startswith("Billboard Hot 100") and (filename.endswith(".csv") or filename.endswith(".crdownload")):
+                        print(f"Found file: {filename}")
+                        full_path = os.path.join(script_dir, filename)
+                        
+                        if filename.endswith(".crdownload"):
+                            print("File is still downloading, waiting...")
+                            # Wait for download to complete (file to lose .crdownload extension)
+                            download_wait = 0
+                            while download_wait < 30:  # Wait up to 30 seconds
+                                time.sleep(1)
+                                download_wait += 1
+                                # Check if the .crdownload version disappeared and regular file exists
+                                if not os.path.exists(full_path) and os.path.exists(full_path[:-11]):
+                                    filename = filename[:-11]  # Remove .crdownload extension
+                                    full_path = os.path.join(script_dir, filename)
+                                    print(f"Download completed: {filename}")
+                                    break
+                            
+                            if download_wait >= 30:
+                                raise Exception("Download did not complete in time")
+                        
+                        # Now handle the file as before
+                        if filename != "Billboard Hot 100.csv":
+                            new_path = os.path.join(script_dir, "Billboard Hot 100.csv")
+                            os.rename(full_path, new_path)
+                            print(f"Renamed file to: Billboard Hot 100.csv")
+                        file_found = True
+                        break
+                if file_found:
+                    break
+                time.sleep(1)
+                print("Still waiting for file...")
+            
+            if not file_found:
+                raise Exception("Download timeout: CSV file not found")
+                
+            # Verify file exists and is non-empty before closing browser
+            final_path = os.path.join(script_dir, "Billboard Hot 100.csv")
+            if not os.path.exists(final_path):
+                raise Exception("File not found after download")
+            if os.path.getsize(final_path) == 0:
+                raise Exception("Downloaded file is empty")
+            
+            print(f"File verified at {final_path} with size {os.path.getsize(final_path)} bytes")
+            # Wait a bit more after verification
+            time.sleep(5)
+            
+        except Exception as e:
+            print(f"Error with export button or download: {str(e)}")
+            raise
+            
     except Exception as e:
         print(f"Error during execution: {str(e)}")
         raise
@@ -106,7 +186,8 @@ def export_playlist_data(playlist_uri):
 def process_data():
     """Process the downloaded CSV and extract averages"""
     # Read the CSV file
-    df = pd.read_csv('Billboard Hot 100.csv')
+    csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Billboard Hot 100.csv")
+    df = pd.read_csv(csv_path)
     
     # Rename columns
     header_changes = {
@@ -152,7 +233,15 @@ def daily_task():
     try:
         print("Starting daily update...")
         export_playlist_data(playlist_uri)
-        time.sleep(10)  # Wait for download to complete
+        
+        # Verify file exists before processing
+        csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Billboard Hot 100.csv")
+        print(f"Checking for file at: {csv_path}")
+        if not os.path.exists(csv_path):
+            raise Exception(f"CSV file not found at {csv_path}")
+        print(f"File exists with size: {os.path.getsize(csv_path)} bytes")
+        
+        time.sleep(15)  # Wait a bit more
         process_data()
         print("Daily update completed successfully")
     except Exception as e:
